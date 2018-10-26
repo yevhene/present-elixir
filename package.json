@@ -1,0 +1,15 @@
+{
+  "name": "present-elixir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./presentation/app"
+  },
+  "repository": "github:yevhene/present-elixir.git",
+  "author": "Yevhen Shemet",
+  "license": "WTFPL",
+  "dependencies": {
+    "presentation": "file:presentation"
+  }
+}
