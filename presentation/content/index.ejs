@@ -11,6 +11,18 @@
   <h3>Erlang</h3>
 
   <section>
+    <h4>History</h3>
+
+    <div>It was originally a proprietary language within <b>Ericsson</b>, developed by <b>Joe Armstrong</b>, <b>Robert Virding</b> and <b>Mike Williams</b> in <i>1986</i>, but was <b>released as open source in 1998</b>. Erlang/OTP is supported and maintained by the OTP product unit at Ericsson.</div>
+  </section>
+
+  <section>
+    <h4>History</h3>
+
+    <div>The name <b>"Erlang"</b>, attributed to <b>Bjarne Däcker</b>, has been presumed by those working on the telephony switches (for whom the language was designed) to be a reference to <b>Danish mathematician and engineer Agner Krarup Erlang</b> as well as a syllabic abbreviation of <b>"Ericsson Language"</b>.</div>
+  </section>
+
+  <section>
     <h4>Functional</h4>
 
     <ul>
@@ -39,9 +51,19 @@
     <ul>
       <li>Every process has event loop</li>
       <li>Processes communicate through messages</li>
+      <li>Message waits in "mailbox" utill it is processed</li>
       <li>Process decides when and how to interpret message</li>
-      <li><i>True OOP</i></li>
     </ul>
+
+    <div><i>True OOP</i></div>
+  </section>
+
+  <section>
+    <h4>Supervision Trees</h4>
+
+    <img src="images/supervision-trees.png" />
+
+    <div><a href="https://bitbucket.org/ferd/chut"><i>https://bitbucket.org/</i>ferd/chut</a></div>
   </section>
 
   <section>
@@ -68,15 +90,178 @@
   </section>
 
   <section>
+    <h4>Widely adopted</h4>
+
+    <ul>
+      <li>Amazon</li>
+      <li>Facebook</li>
+      <li>WhatsApp</li>
+      <li>Ericsson</li>
+    </ul>
+  </section>
+
+  <section>
     <h4>Complex heritage</h4>
 
     <ul>
+      <li>Focused on Telecom</li>
       <li>Prolog derived (;,.)</li>
       <li>Single assingment</li>
       <li>Hard to use UTF-8</li>
       <li>Alien syntax</li>
     </ul>
   </section>
+</section>
+
+<section>
+  <h3>Elixir</h3>
+
+  <section>
+    <h4>History</h4>
+
+    <div><b>José Valim</b> is the creator of the <b>Elixir</b> programming language, an R&amp;D project of Plataformatec (at <b>2011</b>). His goals were to enable higher extensibility and productivity in the Erlang VM while keeping compatibility with Erlang's ecosystem.</div>
+  </section>
+</section>
+
+<section>
+  <h3>Elixir: Syntax</h3>
+
+  <section>
+    <h4>Let's mix in some neat Ruby syntax</h4>
+  </section>
+
+  <section>
+    <h4>Hello World</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+IO.puts "Hello World!"
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+iex
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Functions and Modules</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule Greeter do
+  def hello(name) do
+    IO.puts "Hello #{name}!"
+  end
+end
+
+Greeter.hello("World")
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+elixir hello-fn.exs
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Short Notation</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule Greeter, do: def hello(name), do: IO.puts "Hello #{name}!"
+
+Greeter.hello("World")
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Multiple clauses</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Recursion</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule Fib do
+  def fib(0), do: 0
+  def fib(1), do: 1
+  def fib(n), do: fib(n - 1) + fib(n - 2)
+end
+
+IO.puts Fib.fib(10)
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Tail call recursion</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule Fib do
+  def fib(a), do: fib(1, 1, a)
+
+  defp fib(a, _, 0 ), do: a
+  defp fib(a, b, n), do: fib(b, a + b, n - 1)
+end
+
+IO.puts Fib.fib(80)
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>TODO</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+- guards
+- conditions
+- pipe
+- structs
+- destruction
+- Protocols
+- Data streams is Web
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h3>Elixir: Metaprogramming</h3>
+
+  <section>
+    <h4>Let's mix in some awesome LISP metaprogramming</h4>
+  </section>
+
+  <section>
+    <h4>TODO</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+- defmacro
+- AST matching
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h3>Phoenix</h3>
+
+  <section>
+    <h4>Let's mix in some Ruby on Rails goodies</h4>
+  </section>
+
+  <section>
+    <h4>TODO</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+- Rails-alike
+- Ecto
+- Plug
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h3>References</h3>
+
+  <ul>
+    <li><a href="https://learnyousomeerlang.com">https://learnyousomeerlang.com</a></li>
+  </ul>
 </section>
 
 <section>
