@@ -111,6 +111,12 @@
       <li>Alien syntax</li>
     </ul>
   </section>
+
+  <section>
+    <h4>Summary</h4>
+
+    <h5>Beautiful inside scary outside</h5>
+  </section>
 </section>
 
 <section>
@@ -192,6 +198,21 @@ IO.puts Fib.fib(10)
   </section>
 
   <section>
+    <h4>Guards</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule Fib do
+  def fib(n) when n &gt; 40, do: raise "You will never get it"
+  def fib(0), do: 0
+  def fib(1), do: 1
+  def fib(n), do: fib(n - 1) + fib(n - 2)
+end
+
+IO.puts Fib.fib(41)
+    </code></pre>
+  </section>
+
+  <section>
     <h4>Tail call recursion</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
@@ -207,17 +228,149 @@ IO.puts Fib.fib(80)
   </section>
 
   <section>
-    <h4>TODO</h4>
+    <h4>List destruction</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-- guards
-- conditions
-- pipe
-- structs
-- destruction
-- Protocols
-- Data streams is Web
+defmodule Collection do
+  def len([]), do: 0
+  def len([_head | tail]), do: 1 + len(tail)
+end
+
+IO.puts Collection.len([1, 2, 3])
     </code></pre>
+  </section>
+
+  <section>
+    <h4>Conditionals (cond)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+cond do
+  2 + 2 == 5 -&gt;
+    "This will not be true"
+  2 * 2 == 3 -&gt;
+    "Nor this"
+  1 + 1 == 2 -&gt;
+    "But this will"
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Conditionals (case)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+case {1, 2, 3} do
+  {1, x, 3} when x &gt; 0 -&gt;
+    "Will match"
+  [1 | _] -&gt;
+    "Will not match"
+  _ -&gt;
+    "Would match, if guard condition were not satisfied"
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Conditionals (if)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+if x &gt; 0 do
+  "This won't be seen"
+else
+  "This will"
+end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+if x &gt; 0, do: "This won't be seen", else: "This will"
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Other complex data types</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+{:ok, "result"} # Tuple
+
+[{:a, 8}, {:b, 9}] == [a: 8, b: 9] # Keyword list
+
+%{a: 8, b: 9} # Map
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Pipe operator</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+string = "hello, world!"
+words = String.split(string, " ")
+capitalized_words = Enum.map(words, &amp;String.capitalize/1)
+Enum.join(capitalized_words, " ")
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+"hello, world!"
+|&gt; String.split(" ")
+|&gt; Enum.map(&amp;String.capitalize/1)
+|&gt; Enum.join
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Streams</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+0
+|&gt; Stream.iterate(&amp;(&amp;1 + 1))
+|&gt; Stream.filter(fn x -&gt; rem(x, 2) == 0 end)
+|&gt; Stream.take(10)
+|&gt; Enum.map(&amp;IO.puts/1)
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Structs</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmodule User do
+  defstruct name: "John", age: 27
+end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+user = %User{age: 27, name: "John"}
+
+%{age: x} = user
+
+IO.puts x
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Protocols</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defprotocol String.Chars do
+  def to_string(term)
+end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defimpl String.Chars, for: User do
+  def to_string(%User{name: name}), do: name
+end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+user = %User{}
+IO.puts user #=&gt; John
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Summary</h4>
+
+    <h5>Best for building pipes of data processing</h5>
   </section>
 </section>
 
@@ -252,6 +405,7 @@ IO.puts Fib.fib(80)
 - Rails-alike
 - Ecto
 - Plug
+- Demo: novel
     </code></pre>
   </section>
 </section>
