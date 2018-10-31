@@ -228,19 +228,6 @@ IO.puts Fib.fib(80)
   </section>
 
   <section>
-    <h4>List destruction</h4>
-
-    <pre><code class="hljs" data-trim contenteditable>
-defmodule Collection do
-  def len([]), do: 0
-  def len([_head | tail]), do: 1 + len(tail)
-end
-
-IO.puts Collection.len([1, 2, 3])
-    </code></pre>
-  </section>
-
-  <section>
     <h4>Conditionals (cond)</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
@@ -256,7 +243,7 @@ end
   </section>
 
   <section>
-    <h4>Conditionals (case)</h4>
+    <h4>Pattern matching</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
 case {1, 2, 3} do
@@ -271,18 +258,15 @@ end
   </section>
 
   <section>
-    <h4>Conditionals (if)</h4>
+    <h4>List destruction</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-if x &gt; 0 do
-  "This won't be seen"
-else
-  "This will"
+defmodule Collection do
+  def len([]), do: 0
+  def len([_head | tail]), do: 1 + len(tail)
 end
-    </code></pre>
 
-    <pre><code class="hljs" data-trim contenteditable>
-if x &gt; 0, do: "This won't be seen", else: "This will"
+IO.puts Collection.len([1, 2, 3])
     </code></pre>
   </section>
 
@@ -347,6 +331,19 @@ IO.puts x
   </section>
 
   <section>
+    <h4>Match operator =</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+user = %User{age: 27, name: "John"}
+
+%{age: x} = user
+
+27 = x
+^x = 27
+    </code></pre>
+  </section>
+
+  <section>
     <h4>Protocols</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
@@ -382,10 +379,42 @@ IO.puts user #=&gt; John
   </section>
 
   <section>
+    <h4>Macros</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+if x &gt; 0 do
+  "This won't be seen"
+else
+  "This will"
+end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+if x &gt; 0, do: "This won't be seen", else: "This will"
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>defmacro</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+defmacro if(clause, do: then, else: not_then) do
+  quote do
+    cond do
+      unquote(clause) -&gt; unquote(then)
+      true -&gt; unquote(not_then)
+    end
+  end
+end
+    </code></pre>
+
+    <div><a href="https://github.com/elixir-lang/elixir/blob/5a973b92b0efb8cef532433ed58708e9c906cf58/lib/elixir/lib/kernel.ex#L2996">elixir/lib/kernel.ex:2996</a></div>
+  </section>
+
+  <section>
     <h4>TODO</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-- defmacro
 - AST matching
     </code></pre>
   </section>
