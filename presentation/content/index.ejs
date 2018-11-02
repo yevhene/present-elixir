@@ -54,8 +54,33 @@
       <li>Message waits in "mailbox" utill it is processed</li>
       <li>Process decides when and how to interpret message</li>
     </ul>
+  </section>
 
-    <div><i>True OOP</i></div>
+  <section>
+    <h4>Actors is True OOP</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+-module(kitchen).
+-compile(export_all).
+
+fridge1() -&gt;
+  receive
+    {From, {store, _Food}} -&gt;
+      From ! {self(), ok},
+      fridge1();
+    {From, {take, _Food}} -&gt;
+      %% uh....
+      From ! {self(), not_found},
+      fridge1();
+    terminate -&gt;
+      ok
+end.
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Pid = spawn(kitchen, fridge1, [[baking_soda]]).
+Pid ! {self(), {store, milk}}.
+    </code></pre>
   </section>
 
   <section>
@@ -375,7 +400,7 @@ IO.puts user #=&gt; John
   <h3>Elixir: Metaprogramming</h3>
 
   <section>
-    <h4>Let's mix in some awesome LISP metaprogramming</h4>
+    <h4>Let's mix in some wild LISP metaprogramming</h4>
   </section>
 
   <section>
@@ -412,10 +437,12 @@ end
   </section>
 
   <section>
-    <h4>TODO</h4>
+    <h4>AST match</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-- AST matching
+defmacro calc({:+, _, args}) do
+  Enum.at(args, 0) * 1 + Enum.at(args, 1) * 2
+end
     </code></pre>
   </section>
 </section>
@@ -428,13 +455,100 @@ end
   </section>
 
   <section>
-    <h4>TODO</h4>
+    <h4>Phoenix</h4>
+
+    <ul>
+      <li>Real-time channels</li>
+      <li>Large amounts of background processing</li>
+      <li>Real-time state updates</li>
+      <li>Non-stop applications</li>
+    </ul>
+  </section>
+
+  <section>
+    <h4>Plug</h4>
+
+    <ul>
+      <li>A specification for composable modules between web applications</li>
+      <li>Connection adapters for different web servers in the Erlang VM</li>
+    </ul>
+  </section>
+
+  <section>
+    <h4>Example</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-- Rails-alike
-- Ecto
-- Plug
-- Demo: novel
+defmodule Example.HelloWorldPlug do
+  import Plug.Conn
+
+  def init(options), do: options
+
+  def call(conn, _opts) do
+    conn
+    |&gt; put_resp_content_type("text/plain")
+    |&gt; send_resp(200, "Hello World!\n")
+  end
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Ecto</h4>
+
+    <div>A database wrapper and language integrated query for Elixir.</div>
+  </section>
+
+  <section>
+    <h4>Ecto (Schema)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+use Ecto.Schema
+
+schema "posts" do
+  field :title, :string
+  field :body, :text
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Ecto (Changeset)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+import Ecto.Changeset
+
+def changeset(%Post{} = post, attrs) do
+  post
+  |&gt; cast(attrs, [:title, :body])
+  |&gt; validate_required(:title)
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Ecto (Repo)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+alias MyApp.{Post, Repo}
+
+Repo.insert(changeset)
+Repo.update(changeset)
+Repo.delete(post)
+Repo.all(Post)
+Repo.get!(Post, id)
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Ecto (Query)</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+import Ecto.Query, only: [from: 2]
+
+query =
+  from p in Post,
+    join: t in Tag, where: t.post_id == p.id
+    select: [p.title, t.name]
     </code></pre>
   </section>
 </section>
@@ -444,6 +558,8 @@ end
 
   <ul>
     <li><a href="https://learnyousomeerlang.com">https://learnyousomeerlang.com</a></li>
+    <li><a href="https://www.mojotech.com/blog/how-elixir-ecto-promotes-well-designed-applications/">How Elixir's Ecto Promotes Well-Designed Applications</a></li>
+    <li><a href="https://elixirschool.com">Elixir School</a></li>
   </ul>
 </section>
 
