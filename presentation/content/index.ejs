@@ -23,17 +23,6 @@
   </section>
 
   <section>
-    <h4>Functional</h4>
-
-    <ul>
-      <li>Immutability</li>
-      <li>Pattern Matching (also Binary)</li>
-      <li>Pure functions (preferred)</li>
-      <li>Recursion (also Tail)</li>
-    </ul>
-  </section>
-
-  <section>
     <h4>Scalable</h4>
 
     <ul>
@@ -43,6 +32,17 @@
     </ul>
 
     <div><i>Demo: ring</i></div>
+  </section>
+
+  <section>
+    <h4>Functional</h4>
+
+    <ul>
+      <li>Immutability</li>
+      <li>Pattern Matching (also Binary)</li>
+      <li>Pure functions (preferred)</li>
+      <li>Recursion (also Tail)</li>
+    </ul>
   </section>
 
   <section>
@@ -129,11 +129,11 @@ Pid ! {self(), {store, milk}}.
     <h4>Complex heritage</h4>
 
     <ul>
-      <li>Focused on Telecom</li>
       <li>Prolog derived (;,.)</li>
-      <li>Single assingment</li>
-      <li>Hard to use UTF-8</li>
       <li>Alien syntax</li>
+      <li>Single assingment</li>
+      <li>Focused on Telecom</li>
+      <li>Hard to use UTF-8</li>
     </ul>
   </section>
 
@@ -237,7 +237,7 @@ IO.puts Fib.fib(41)
 defmodule Fib do
   def fib(a), do: fib(1, 1, a)
 
-  defp fib(a, _, 0 ), do: a
+  defp fib(a, _, 0), do: a
   defp fib(a, b, n), do: fib(b, a + b, n - 1)
 end
 
@@ -261,14 +261,28 @@ end
   </section>
 
   <section>
+    <h4>Complex data types</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+[1, 2, 3] # List
+
+{:ok, "result"} # Tuple
+
+[{:a, 8}, {:b, 9}] == [a: 8, b: 9] # Keyword list
+
+%{a: 8, b: 9} # Map
+    </code></pre>
+  </section>
+
+  <section>
     <h4>Pattern matching</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
 case {1, 2, 3} do
-  {1, x, 3} when x &gt; 0 -&gt;
-    "Will match"
   [1 | _] -&gt;
     "Will not match"
+  {1, x, 3} when x &gt; 0 -&gt;
+    "Will match"
   _ -&gt;
     "Would match, if guard condition were not satisfied"
 end
@@ -285,18 +299,6 @@ defmodule Collection do
 end
 
 IO.puts Collection.len([1, 2, 3])
-    </code></pre>
-  </section>
-
-  <section>
-    <h4>Other complex data types</h4>
-
-    <pre><code class="hljs" data-trim contenteditable>
-{:ok, "result"} # Tuple
-
-[{:a, 8}, {:b, 9}] == [a: 8, b: 9] # Keyword list
-
-%{a: 8, b: 9} # Map
     </code></pre>
   </section>
 
@@ -338,21 +340,13 @@ defmodule User do
   defstruct name: "John", age: 27
 end
     </code></pre>
-
-    <pre><code class="hljs" data-trim contenteditable>
-user = %User{age: 27, name: "John"}
-
-%{age: x} = user
-
-IO.puts x
-    </code></pre>
   </section>
 
   <section>
     <h4>Match operator =</h4>
 
     <pre><code class="hljs" data-trim contenteditable>
-user = %User{age: 27, name: "John"}
+user = %User{name: "Jack"}
 
 %{age: x} = user
 
@@ -436,6 +430,10 @@ end
 defmacro calc({:+, _, args}) do
   Enum.at(args, 0) * 1 + Enum.at(args, 1) * 2
 end
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+calc 2 + 3
     </code></pre>
   </section>
 </section>
@@ -550,7 +548,7 @@ query =
   <h3>References</h3>
 
   <ul>
-    <li><a href="https://learnyousomeerlang.com">https://learnyousomeerlang.com</a></li>
+    <li><a href="https://learnyousomeerlang.com">learnyousomeerlang.com</a></li>
     <li><a href="https://www.mojotech.com/blog/how-elixir-ecto-promotes-well-designed-applications/">How Elixir's Ecto Promotes Well-Designed Applications</a></li>
     <li><a href="https://elixirschool.com">Elixir School</a></li>
   </ul>
